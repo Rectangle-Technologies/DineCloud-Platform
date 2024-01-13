@@ -4,15 +4,15 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: "http://localhost:3010/",
   },
-  
+
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   },
 
   devServer: {
-    port: 3000,
+    port: 3010,
     historyApiFallback: true,
   },
 
@@ -41,11 +41,9 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "dinecloud.bootstraper",
+      name: "user_management_lib",
       filename: "remoteEntry.js",
-      remotes: {
-        "state_management_lib": "state_management_lib@http://localhost:3005/remoteEntry.js",
-      },
+      remotes: {},
       exposes: {},
       shared: {
         ...deps,

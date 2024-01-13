@@ -44,7 +44,10 @@ module.exports = (_, argv) => ({
       name: "state_management_lib",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./RemoteComponent": "./src/RemoteComponent",
+        "./store": "./src/store"
+      },
       shared: {
         ...deps,
         react: {
