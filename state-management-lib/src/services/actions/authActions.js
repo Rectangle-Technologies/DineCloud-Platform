@@ -25,7 +25,6 @@ export const login = (data, enqueueSnackbar, navigate) => async (dispatch) => {
         navigate("../dashboard", { replace: true })
         dispatch(removeLoader())
     } catch (err) {
-        console.log(err)
         dispatch(removeLoader())
         enqueueSnackbar(
             err?.response?.data?.errors

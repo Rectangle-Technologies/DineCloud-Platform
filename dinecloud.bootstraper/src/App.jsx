@@ -1,25 +1,25 @@
+import "./index.css";
+import { connect } from "react-redux";
+import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import ReactDOM from "react-dom";
-import { connect } from "react-redux";
-import { SnackbarProvider } from "notistack";
-// import Login from "user_management_bootstraper/Login";
-import "./index.css";
+import RouterService from "./core/router";
+import State_management_lib_PluginComponent from "state_management_lib/RemoteComponent";
+import store, { addStoreReducer } from "state_management_lib/store";
+import theme from "./core/theme";
+import ThemeContext from "./core/ThemeContext";
+import OverlayLoader from "./core/loader";
 
 class ThemeService extends React.Component {
   constructor(props) {
       super(props);
       this.state = {};
-
-      console.log("ThemeService props", props);
-      console.log("ThemeService state", store.getState());
       addStoreReducer("theme", (state = theme, action) => {
-          console.log("ThemeService store reducer", state, action);
           return state;
       });
   }
 
   componentDidUpdate(prevProps, prevState) {
-      console.log("ThemeService componentDidUpdate", prevProps, prevState);
       if (prevProps.theme !== this.props.theme) {
           this.setState({
               theme: this.props.theme,
@@ -39,7 +39,6 @@ class ThemeService extends React.Component {
 }
 
 const themeStateToProp = (state) => {
-  console.log("themeStateToProp", state);
   return {
       theme: state.theme,
   };
@@ -47,10 +46,34 @@ const themeStateToProp = (state) => {
 
 const ThemeStateService = connect(themeStateToProp)(ThemeService);
 
-const App = () => (
-  <div className="container">
-    HELLO
-    {/* <Login callBackIfLoggedIn={() => {console.log("User Already logged in"); alert("User already logged in")}} /> */}
-  </div>
-);
-ReactDOM.render(<App />, document.getElementById("app"));
+class StateManagementService extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = {};
+  }
+
+  render() {
+      return (
+          <React.Suspense fallback={<OverlayLoader />}>
+              <State_management_lib_PluginComponent>
+                  {this.props.children}
+              </State_management_lib_PluginComponent>
+          </React.Suspense>
+      );
+  }
+}
+class App extends React.Component {
+  render() {
+      return (
+          <div className="dinecloud-app">
+              <StateManagementService>
+                  <ThemeStateService>
+                      <RouterService />
+                  </ThemeStateService>
+              </StateManagementService>
+          </div>
+      );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("dinecloud-application"));

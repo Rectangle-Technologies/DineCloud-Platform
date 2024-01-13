@@ -45,6 +45,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         "state_management_lib": "state_management_lib@http://localhost:3005/remoteEntry.js",
+        "authentication_lib": "authentication_lib@http://localhost:3010/remoteEntry.js"
       },
       exposes: {},
       shared: {

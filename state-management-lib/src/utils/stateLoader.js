@@ -29,7 +29,7 @@ class StateLoader {
             localStorage.setItem("Kuber", serializedState)
             this.state = serializedState
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 

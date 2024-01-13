@@ -9,9 +9,7 @@ import sampleReducer from "./sampleReducer"
 import { addStoreReducer } from "./store"
 
 const dispatchFunction = () => (dispatch) => {
-  console.log("dispatch function called")
   setTimeout(() => {
-    console.log("dispatch function called after 5 seconds")
     dispatch({ type: "SAMPLE_ACTION", payload: "Completed" })
   }, 5000)
 }
