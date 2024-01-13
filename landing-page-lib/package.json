@@ -1,5 +1,5 @@
 {
-  "name": "landing-page-lib",
+  "name": "landing_page_lib",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode production",

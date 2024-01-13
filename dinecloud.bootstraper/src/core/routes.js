@@ -7,6 +7,15 @@ import OverlayLoader from "./loader"
 const LandingPage = () => {
     return <div>
         <ErrorBoundary>
+            <PluginInjector pluginName={"landing_page_lib"}>
+            </PluginInjector>
+        </ErrorBoundary>
+    </div>
+}
+
+const LoginPage = () => {
+    return <div>
+        <ErrorBoundary>
             <PluginInjector pluginName={"authentication_lib"}>
             </PluginInjector>
         </ErrorBoundary>
@@ -48,6 +57,10 @@ const routes = [
     {
         path: "/",
         element: <LandingPage />,
+    },
+    {
+        path: "/login",
+        element: <LoginPage />,
     }
 ]
 export default routes

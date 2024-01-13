@@ -44,7 +44,9 @@ module.exports = (_, argv) => ({
       name: "landing_page_lib",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./RemoteComponent": "./src/RemoteComponent",
+      },
       shared: {
         ...deps,
         react: {
